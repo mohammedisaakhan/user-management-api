@@ -1,0 +1,32 @@
+spring:
+    datasource:
+        hikari:
+            connection-test-query: SELECT 1 FROM DUAL
+            minimum-idle: 1
+            maximum-pool-size: 5
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost/oauth2
+        username: root
+        password: Admin@123
+        initialization-mode: always
+        useSSL: false
+    jpa:
+      properties:
+        javax:
+          persistence:
+            sharedCache:
+              #required - enable selective caching mode - only entities with @Cacheable annotation will use L2 cache.
+              mode: ENABLE_SELECTIVE
+      hibernate:
+        ddl-auto: none
+        cache:
+          #required - turn on L2 cache.
+          use_second_level_cache: true
+          #optional - turn on query cache.
+          use_query_cache: true
+          region:
+            #required - classpath to cache region factory.
+            factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+# --- server
+server:
+  port: 8083
