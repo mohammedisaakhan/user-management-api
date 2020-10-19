@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableWebSecurity
 @EnableTransactionManagement
-@ComponentScan(basePackages = "com.aak")
+@ComponentScan(basePackages = "com.auth")
 public class Config {
 
 	// logger
