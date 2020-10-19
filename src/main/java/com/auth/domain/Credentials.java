@@ -1,4 +1,4 @@
-package com.auth.userManagement.domain;
+package com.auth.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
