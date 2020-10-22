@@ -44,7 +44,7 @@ public class ResourcesServerConfiguration  extends ResourceServerConfigurerAdapt
     public void configure(HttpSecurity http) throws Exception{
 
 
-        http
+    			http.cors().and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/v1/account/confirmRegistration").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/account/forgotPassword").permitAll()
@@ -59,11 +59,10 @@ public class ResourcesServerConfiguration  extends ResourceServerConfigurerAdapt
                 .and()
 
                 .headers().addHeaderWriter((request, response) -> {
-            response.addHeader("Access-Control-Allow-Origin", "*");
-            if (request.getMethod().equals("OPTIONS")) {
-                response.setHeader("Access-Control-Allow-Methods", request.getHeader("Access-Control-Request-Method"));
-                response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"));
-            }
-        });
+		            if (request.getMethod().equals("OPTIONS")) {
+		                response.setHeader("Access-Control-Allow-Methods", request.getHeader("Access-Control-Request-Method"));
+		                response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"));
+		            }
+		        });
     }
 }

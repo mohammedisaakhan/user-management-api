@@ -10,9 +10,11 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +42,7 @@ public class AccountController {
 	private Logger logger = Logger.getLogger(getClass().getName());
 
 	@PostMapping("/registration")
-	public ResponseEntity<String> registerNewUser(@ModelAttribute UserDTO userDto, WebRequest request) {
+	public ResponseEntity<String> registerNewUser(@RequestBody UserDTO userDto, BindingResult result, WebRequest request) {
 		
 		String userName = userDto.getUserName();
 
@@ -86,7 +88,7 @@ public class AccountController {
 	}
 	
 	@PostMapping("/changePassword")
-	public ResponseEntity<String> changePassword(@ModelAttribute UserDTO userDto) {
+	public ResponseEntity<String> changePassword(@RequestBody UserDTO userDto) {
 		
 		String userName = userDto.getUserName();
 
@@ -112,7 +114,7 @@ public class AccountController {
 		}
 
 		try {
-			String appUrl = (request.getContextPath() == null | request.getContextPath().isEmpty() ? "http://localhost:8083" : request.getContextPath())+"/api/v1/account/verifyPasswordUpdateToken";
+			String appUrl = (request.getContextPath() == null | request.getContextPath().isEmpty() ? "http://localhost:8080" : request.getContextPath())+"/account/reset-password";
 			
 			eventPublisher.publishEvent(new OnRegistrationSuccessEvent(registeredUser, request.getLocale(),appUrl));
 		} catch(Exception re) {
