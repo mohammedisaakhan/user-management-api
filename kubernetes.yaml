@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-mgmt-deployment
+  labels:
+    app: user-mgmt
+spec:
+  selector:
+    matchLabels:
+      app: user-mgmt
+  template:
+    metadata:
+      labels:
+        app: user-mgmt
+    spec:
+      containers:
+      - name: user-mgmt-container
+        # tag::usermgmtImage[]
+        image: acrcicdresourcegroupdev.azurecr.io/user-mgmt:latest12
+        # end::usermgmtImage[]
+        ports:
+        - containerPort: 8083
+      # tag::usermgmtSecret[]
+      	imagePullPolicy: Always
+      # end::usermgmtSecret[]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-mgmt-service
+spec:
+  # tag::usermgmtLoadBalancer[]
+  type: LoadBalancer
+  # end::usermgmtLoadBalancer[]
+  selector:
+    app: user-mgmt
+  ports:
+  - protocol: TCP
+    port: 8083
+    targetPort: 8083
+    nodePort: 31003

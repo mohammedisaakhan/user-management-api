@@ -1,5 +1,7 @@
 package com.auth.userManagement.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.auth.userManagement.entity.User;
@@ -17,8 +19,18 @@ public interface IUserService {
 	public VerificationToken getVerificationToken(String verificationToken);
 
 	public void enableRegisteredUser(User user);
-
+	
+	public void deActivateRegisteredUser(User user);
+	
 	public void changePassword(User user);
 
 	void removeVerificationToken(User user);
+	
+	public List<User> getUsers();
+
+	public User updateUser(User user);
+
+	void deleteUser(Long id);
+
+
 }

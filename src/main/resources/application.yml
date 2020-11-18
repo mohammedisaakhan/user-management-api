@@ -1,4 +1,6 @@
 spring:
+    application:
+        name: user-management-api
     datasource:
         hikari:
             connection-test-query: SELECT 1 FROM DUAL
@@ -31,3 +33,4 @@ spring:
 # --- server
 server:
   port: 8083
+

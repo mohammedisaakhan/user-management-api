@@ -48,6 +48,9 @@ public class User {
 	@Column(name="enabled")
 	private boolean enabled;
 	
+	@Column(name="isactive")
+	private boolean isActive;
+	
 	@Column(name="email_id")
 	private String email;
 
@@ -93,6 +96,14 @@ public class User {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	public String getEmail() {
@@ -143,6 +154,7 @@ public class User {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + (enabled ? 1231 : 1237);
+		result = prime * result + (isActive ? 1231 : 1237);
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -168,6 +180,8 @@ public class User {
 		} else if (!email.equals(other.email))
 			return false;
 		if (enabled != other.enabled)
+			return false;
+		if (isActive != other.isActive)
 			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
@@ -207,7 +221,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", title=" + title + ", username=" + username + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", password=" + password + ", enabled=" + enabled + ", email=" + email
+				+ ", lastName=" + lastName + ", password=" + password + ", enabled=" + enabled + ", isActive=" + isActive + ", email=" + email
 				+ ", roles=" + roles + "]";
 	}
 
@@ -221,6 +235,7 @@ public class User {
 		user.setUsername(userDto.getUserName());
 		user.setPassword(userDto.getPassword());
 		user.setEnabled(false);
+		user.setIsActive(true);
 		user.setEmail(userDto.getEmail());
 		return user;
 

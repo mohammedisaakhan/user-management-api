@@ -28,8 +28,8 @@ public class Config {
 		javaMailSender.setHost("smtp.gmail.com");
 		javaMailSender.setPort(587);
 		javaMailSender.setProtocol("smtp");
-		javaMailSender.setUsername("mohammed.isaakhan@gmail.com");
-		javaMailSender.setPassword("frwbsckhgwszvjnr");
+		javaMailSender.setUsername("shikha0981@gmail.com");
+		javaMailSender.setPassword("mcldgihsybgpuayw");
 		Properties mailProperties = new Properties();
 		mailProperties.put("mail.smtp.auth", "true");
 		mailProperties.put("mail.smtp.starttls.enable", "true");

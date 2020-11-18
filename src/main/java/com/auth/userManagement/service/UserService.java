@@ -1,6 +1,7 @@
 package com.auth.userManagement.service;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.transaction.Transactional;
@@ -67,6 +68,12 @@ public class UserService implements IUserService {
 	public void enableRegisteredUser(User user) {
 		userDAO.save(user);
 	}
+	
+	@Override
+	@Transactional
+	public void deActivateRegisteredUser(User user) {
+		userDAO.save(user);
+	}
 
 	@Override
 	@Transactional
@@ -86,6 +93,24 @@ public class UserService implements IUserService {
 		if (userToken != null)
 			tokenDAO.remove(userToken);
 
+	}
+
+	@Override
+	public User updateUser(User user) {
+		user.setRoles(Arrays.asList(roleDAO.findByRoleName("ROLE_USER")));
+		userDAO.save(user);
+		return user;
+	}
+
+	@Override
+	public void deleteUser(Long id) {
+		userDAO.delete(id);
+		
+	}
+
+	@Override
+	public List<User> getUsers() {
+		return userDAO.findAll();		
 	}
 	
 

@@ -1,5 +1,7 @@
 package com.auth.userManagement.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +26,19 @@ public class UserDAO implements IUserDAO {
 		if (user == null)
 			return;
 		userRepository.save(user);
+	}
+	
+	@Override
+	public void delete(Long id) {
+
+		if (id == 0)
+			return;
+		userRepository.deleteById(id);
+	}
+
+	@Override
+	public List<User> findAll() {
+		return userRepository.findAll();
 	}
 
 }

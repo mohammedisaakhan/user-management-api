@@ -42,6 +42,8 @@ public class Credentials implements Serializable {
     private List<Authority> authorities;
 
     private boolean enabled;
+    
+    private boolean isActive;
 
     public Long getId() {
         return id;
@@ -113,5 +115,13 @@ public class Credentials implements Serializable {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+    
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 }
